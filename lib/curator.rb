@@ -112,4 +112,13 @@ class Curator
       range.include?(photograph.year.to_i)
     end
   end
+
+  def artists_photographs_by_age(artist)
+    photos = find_photographs_by_artist(artist)
+    hash = Hash.new
+    photos.each do |photo|
+      hash[2018 - photo.year.to_i] = photo.name
+    end
+    hash
+  end
 end
