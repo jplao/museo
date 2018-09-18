@@ -36,6 +36,28 @@ class Curator
     @photographs << Photograph.new(photo_attributes)
   end
 
+  def load_artists(file)
+    artists = []
+    contents = CSV.open file, headers: true, header_converters: :symbol
+    contents.each do |row|
+      artist_hash = {
+        id: row[:id],
+        name: row[:name],
+        born: row[:born],
+        died: row[:died],
+        country: row[:country]
+      }
+      artists << artist_hash
+    end
+    add_artist_from_csv(artists)
+  end
+
+  def add_artist_from_csv(collection)
+    collection.each do |artist|
+      add_artist(collection)
+    end
+  end
+
   def add_artist(artist_attributes)
     @artists << Artist.new(artist_attributes)
   end
@@ -83,5 +105,8 @@ class Curator
     artists.map do |artist|
       artist.id
     end
+  end
+
+  def photographs_taken_between(range)
   end
 end

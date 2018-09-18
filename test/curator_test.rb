@@ -323,4 +323,17 @@ class CuratorTest < Minitest::Test
     curator.load_photographs('./data/photographs.csv')
     assert_instance_of Photograph, curator.photographs[0]
   end
+
+  def test_it_can_load_artists
+    skip
+    curator = Curator.new
+    curator.load_artists('./data/artists.csv')
+    assert_instance_of Artist, curator.artists[0]
+  end
+
+  def test_it_can_find_photos_in_a_range
+    curator = Curator.new
+    curator.load_photographs('./data/photographs.csv')
+    acual = curator.photographs_taken_between(1950..1965)
+  end
 end
