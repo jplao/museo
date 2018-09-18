@@ -1,5 +1,6 @@
 require './lib/artist'
 require './lib/photograph'
+require 'csv'
 
 class Curator
   attr_reader :artists,
@@ -8,6 +9,27 @@ class Curator
   def initialize
     @artists = []
     @photographs = []
+  end
+
+  def load_photographs(file)
+    photographs = []
+    contents = CSV.open file, headers: true, header_converters: :symbol
+    contents.each do |row|
+      photograph_hash = {
+        id: row[:id],
+        name: row[:name],
+        artist_id: row[:artist_id],
+        year: row[:year],
+      }
+      photographs << photograph_hash
+    end
+    add_photographs_from_csv(photographs)
+  end
+
+  def add_photographs_from_csv(collection)
+    collection.each do |photo_attributes|
+      add_photograph(photo_attributes)
+    end
   end
 
   def add_photograph(photo_attributes)
