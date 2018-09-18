@@ -334,6 +334,7 @@ class CuratorTest < Minitest::Test
   def test_it_can_find_photos_in_a_range
     curator = Curator.new
     curator.load_photographs('./data/photographs.csv')
-    acual = curator.photographs_taken_between(1950..1965)
+    actual = curator.photographs_taken_between(1950..1965)
+    assert_equal 1954, actual.first.year.to_i
   end
 end
