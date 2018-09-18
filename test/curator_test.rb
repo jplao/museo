@@ -325,7 +325,6 @@ class CuratorTest < Minitest::Test
   end
 
   def test_it_can_load_artists
-    skip
     curator = Curator.new
     curator.load_artists('./data/artists.csv')
     assert_instance_of Artist, curator.artists[0]
@@ -341,8 +340,16 @@ class CuratorTest < Minitest::Test
   def test_it_can_find_artists_photographs_by_age
     curator = Curator.new
     curator.load_photographs('./data/photographs.csv')
-    curator.load_artists('./data/artists.csv')
+    #curator.load_artists('./data/artists.csv')
 
+    artist_3 = {
+      id: "3",
+      name: "Diane Arbus",
+      born: "1923",
+      died: "1971",
+      country: "United States"
+    }
+    curator.add_artist(artist_3)
     diane_arbus = curator.find_artist_by_id("3")
     actual = curator.artists_photographs_by_age(diane_arbus)
     expected = {44=>"Identical Twins, Roselle, New Jersey",

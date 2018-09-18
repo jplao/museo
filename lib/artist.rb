@@ -5,7 +5,7 @@ class Artist
               :died,
               :country
 
-  def initialize (data)
+  def initialize(data)
     @id = data[:id]
     @name = data[:name]
     @born = data[:born]

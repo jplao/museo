@@ -45,7 +45,7 @@ class Curator
         name: row[:name],
         born: row[:born],
         died: row[:died],
-        country: row[:country]
+        country: row[:country],
       }
       artists << artist_hash
     end
@@ -114,6 +114,7 @@ class Curator
   end
 
   def artists_photographs_by_age(artist)
+    #artist_age_not_photo_age
     photos = find_photographs_by_artist(artist)
     hash = Hash.new
     photos.each do |photo|
