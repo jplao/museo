@@ -1,8 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/curator'
-require './lib/artist'
-require './lib/photograph'
 
 class CuratorTest < Minitest::Test
   def test_it_exists
@@ -43,6 +41,9 @@ class CuratorTest < Minitest::Test
     curator.add_photograph(photo_1)
     curator.add_photograph(photo_2)
 
-    assert_equal [photo_1, photo_2], curator.photographs
+    assert_instance_of Array, curator.photographs
+    assert_instance_of Photograph, curator.photographs.first
+    expected = "Rue Mouffetard, Paris (Boy with Bottles)"
+    assert_equal expected, curator.photographs.first.name
   end
 end
