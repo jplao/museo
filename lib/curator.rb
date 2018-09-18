@@ -35,4 +35,11 @@ class Curator
       photograph.artist_id == artist.id
     end
   end
+
+  def artists_with_multiple_photographs
+    @artists.find_all do |artist|
+      artist_photos = find_photographs_by_artist(artist)
+      artist_photos.count > 1
+    end
+  end
 end
